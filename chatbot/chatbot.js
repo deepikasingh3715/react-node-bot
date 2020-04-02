@@ -20,24 +20,23 @@ const sessionPath = sessionClient.sessionPath('reactpageagent-wruxci','react-bot
 
 
 module.exports = {
-   //textQuery: async function(text,parameters={}){
-    textQuery: async function(text){
-   
+   textQuery: async function(text,parameters={}){
+ 
    let self = module.exports;
     const request = {
         session: sessionPath,
         queryInput: {
           text: {
             text:text,
-            //text: 'req.body.text',
-            languageCode: 'config.dialogFlowSessionLanguageCode',
+            //languageCode: 'config.dialogFlowSessionLanguageCode',
+            languageCode:'en-US',
           },
         },
         queryParams:{
-          payload:{
+         payload:{
               data:parameters
           }
-        }
+         }
       };
 
     let responses = await sessionClient.detectIntent(request);
@@ -46,16 +45,16 @@ module.exports = {
     return responses;
    },
 
-   //eventQuery: async function(event,parameters){
-   eventQuery: async function(event){
+   eventQuery: async function(event,parameters){
+  // eventQuery: async function(event){
     let self = module.exports;
     const request = {
         session: sessionPath,
         queryInput: {
           event: {
             name:event,
-            //parameters:structjson.jsonToStructProto(parameters),//js to protostruct
-            languageCode: 'config.dialogFlowSessionLanguageCode',
+            parameters:structjson.jsonToStructProto(parameters),//js to protostruct
+            languageCode: 'en-US',
           },
         }
         
@@ -68,7 +67,7 @@ module.exports = {
    },
 
    handleAction:function(responses){
-       return responses;
+    return responses;     
    }
 
 }
